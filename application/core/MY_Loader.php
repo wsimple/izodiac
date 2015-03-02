@@ -21,7 +21,7 @@ class MY_Loader extends CI_Loader{
         //Data
         $vars['mainMenu'] = $ci->ModelContents->getRows(" WHERE id_type = '1' AND id_content = '0' "); //top menu
         $vars['servicesMenu'] = $ci->ModelContents->getRows(" WHERE id_type = '2' AND id_status='1'"); //footer menu
-        $vars['blogMenu'] = $ci->ModelContents->getRows(" WHERE id_type = '3' AND id_status='1'"); //right blog menu
+        $vars['blogMenu'] = $ci->ModelContents->getRows(" WHERE id_type = '3' AND id_status='1'", ' LIMIT 8', ' ORDER BY id DESC'); //right blog menu
 
         if (isset($vars['wp_user']) && count($vars['wp_user']) > 1) {
             $vars['wpanelMenu'] = $ci->ModelContents->getRows(" WHERE id_type = '5' AND id NOT IN ('5', '6', '8') "); //wpanel session

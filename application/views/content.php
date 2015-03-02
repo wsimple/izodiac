@@ -1,8 +1,8 @@
-<?php
+<?php //echo $idiom;
 	$_content = array(
-		'title' => ($idiom=='_english') ? $content->title_english : $content->title,
-		'summary' => ($idiom=='_english') ? $content->summary_english : $content->summary,
-		'body' => ($idiom=='_english') ? $content->body_english :$content->body
+		'title' => ($idiom=='_english') ? ($content->title_english!=''?$content->title_english:$content->title) : $content->title,
+		'summary' => ($idiom=='_english') ? ($content->summary_english!=''?$content->summary_english:$content->summary) : $content->summary,
+		'body' => ($idiom=='_english') ? ($content->body_english!=''?$content->body_english:$content->body) :$content->body
 	);
 ?>
 <div class="row">
@@ -23,25 +23,6 @@
 				</p>
 			</div>	
 		</div>
-
-		<?php if ($is_post){ //if the content is a blog post ?>
-		<div class="row">
-			<div class="large-12 columns">
-			<h3><small class="section-title"><?=$language->line('general_related_post')?></small></h3>
-			<ul class="suggest-list">
-				<?php 
-					foreach ($more_posts as $array){
-						$url_post = $config['domain'].'/content/body/'.str_replace(' ','-',formatString(convert_accented_characters($array['title'.$idiom]),3));
-      					$title_post = formatString($array['title'.$idiom]); 
-				?>
-						<li>
-							<img src="<?=base_url()?>img/arrow.png" alt="<?=$array['title']?>" width="24" height="24">&nbsp;
-							<?=anchor($url_post,$title_post,'title="'.$language->line('general_go_to').': '.$title_post.'"')?>
-						</li>
-				<?php } ?>
-			</ul>
-		</div>
-		<?php } ?>
 
 		<div class="row">
 			&nbsp;
@@ -79,7 +60,7 @@
 		  <?php 
 		    foreach ($blog_summary as $array){
 		      $url_post = $config['domain'].'/content/body/'.$array['id'];
-		      $title_post = substr(formatString($array['title']),0,100);
+		      $title_post = (trim($array['title'.$idiom])!='') ? substr(formatString($array['title'.$idiom]),0,100) : substr(formatString($array['title']),0,100);
 		  ?>
 		      <li>
 		      
@@ -90,7 +71,7 @@
 		        <h6><?=anchor($url_post, $title_post, 'title="'.$language->line('general_go_to').': '.$title_post.'"')?></h6>
 
 		        <div class="post-summary paragraph">
-		          <?=substr($array['summary'],0,200)?>&nbsp;...
+		          <?=(trim($array['summary'.$idiom])!='') ? substr($array['summary'.$idiom],0,200) : substr($array['summary'],0,200)?>&nbsp;...
 		          <br>
 		          <?=anchor($url_post,$language->line('general_more_info'),'title="'.$language->line('general_go_to').': '.$title_post.'"')?>
 		        </div>

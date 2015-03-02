@@ -22,10 +22,12 @@
 	<!-- Blog -->
 	<h5><?=$language->line('general_browse_label')?></h5>
 	<ul class="side-nav">
-	  <?php foreach ($blogMenu as $array){ ?>
+	  <?php foreach ($blogMenu as $array){ 
+	  		$title_post = (trim($array['title'.$idiom])!='') ? substr(formatString($array['title'.$idiom]),0,100) : substr(formatString($array['title']),0,100);
+	  	?>
 	    <li>
 			<a href="<?=$config['domain'].'/content/body/'.$array['id']?>">
-			<img src="<?=base_url()?>/img/arrow.png" alt="<?=$array['title']?>" width="15" height="15">&nbsp;<?=formatString($array['title'.$idiom])?>
+			<img src="<?=base_url()?>/img/arrow.png" alt="<?=$title_post?>" width="15" height="15">&nbsp;<?=$title_post?>
 	      	</a>
 	    </li>
 	  <?php } ?>

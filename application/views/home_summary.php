@@ -4,14 +4,14 @@
 			$i=1;
 		    foreach ($blog_summary as $array){
 		      $url_post = $config['domain'].'/content/body/'.$array['id'];
-		      $title_post = substr(formatString($array['title'.$idiom]),0,100);
+		      $title_post = (trim($array['title'.$idiom])!='') ? substr(formatString($array['title'.$idiom]),0,100) : substr(formatString($array['title']),0,100);
 		?>
 			<article>
 				<h3><?=anchor($url_post, $title_post, 'title="'.$language->line('general_go_to').': '.$title_post.'"')?></h3>
-				<h6><small>Written by <a href="http://tagbum.com/Izodiac"><?=$array['author']?></a><?=' '.$language->line('general_article_on').' '.formatDate($array['date'])?></h6></small>
+				<h6><small><?php echo $language->line('general_writtenby_label'); ?> <a href="http://tagbum.com/Izodiac"><?=$array['author']?></a><?=' '.$language->line('general_article_on').' '.formatDate($array['date'])?></h6></small>
 				<div class="row">
 					<div class="large-6 columns">
-						<p><?=substr($array['summary'],0,520)?>.</p>
+						<p><?=(trim($array['summary'.$idiom])!='') ? substr($array['summary'.$idiom],0,520) : substr($array['summary'],0,520)?>.</p>
 					</div>
 					<div class="large-6 columns">
 						<img src="<?=(file_exists($array['image']) ? base_url().$array['image'] : base_url().'img/no-pic.gif')?>" class="radius" alt="<?=$title_post?>">
