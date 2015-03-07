@@ -283,6 +283,28 @@ if (!function_exists('sub_menu')) {
 	}
 }
 
+if (!function_exists('has_rate')) {
+	function has_rate($id_service, $rates)
+	{
+		$array = array();	
+		foreach ($rates as $value) {
+			if ($id_service == $value['id_service']){	
+				$array = $value;
+				break;
+			}
+		}
+		return $array;	
+	}
+}
+
+if (!function_exists('get_content_type')) {
+	function get_content_type($id)
+	{
+		$ci = get_instance();
+		return $ci->ModelContents->get_types(" WHERE id = '".$id."' ");	
+	}
+}
+
 
 
 

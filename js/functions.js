@@ -95,8 +95,25 @@ function deleteRecord(url, layer, title){
 	});	
 }
 
-function showLayer(layer){
-	
-  		$(layer).fadeIn('slow');
-	
+function removeRate(rate){
+	alert(rate);
 }
+
+function showLayer(layer){
+  		$(layer).fadeIn('slow');
+}
+
+function number_format(num, type){
+	var format = '';
+	
+	switch(type){
+		case 1:
+			format = '0,0.00';
+		break;
+	}	
+
+	return numeral(num).format(format)
+}
+
+
+

@@ -148,13 +148,19 @@ footer .copy{
 	border-radius: 5px;
 }
 
+.title_dialogs{
+	color: #2C97B1 !important;
+	font-weight: bold;
+}
+
+.cursor_pointer{
+	cursor: pointer;
+}
 
 
 
 
-
-
-
+/*
 
 .post-summary{
 	font-family: inherit;
@@ -374,3 +380,9 @@ footer .copy{
 	padding:10px 0 0 40px !important;
 }
 
+.mytd{
+	border-right: 1px solid #DDDDDD !important;
+	padding-top: 20px !important;
+}
+
+*/

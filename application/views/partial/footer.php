@@ -34,7 +34,7 @@
 
 <script src="<?=base_url()?>js/jquery.smartmenus.js"></script>
 
-<script src="<?=base_url()?>js/functions.min.js"></script>
+<script src="<?=base_url()?>js/functions.js"></script>
 
 <script>
   $(document).foundation();

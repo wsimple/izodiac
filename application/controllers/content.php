@@ -50,9 +50,18 @@ class Content extends CI_Controller {
 			break;
 
 			case '7': //content list
-				$this->data['contents_list'] = $this->ModelContents->getRows(" WHERE is_view = '0' AND id_content = 0 AND id NOT IN (SELECT id_content FROM contents)");
+				$this->load->model('ModelRates');
+				$this->data['rates'] = $this->ModelRates->getRows();
+				$this->data['contents_list'] = $this->ModelContents->getRows(" WHERE is_view = '0'");// AND id_content = 0 AND id NOT IN (SELECT id_content FROM contents)
 				$this->data['list_type'] = $this->ModelContents->get_types(" WHERE id != '5' ");
 				$this->data['wp_user'] = $this->session->userdata('wp-user');
+			break;
+
+			case '23':
+				//$this->load->model('Rates');
+				$this->data['services'] = $this->ModelContents->getRows(" WHERE id_type = 2");
+				$this->data['wp_user'] = $this->session->userdata('wp-user');
+
 			break;
 		}
 
@@ -274,7 +283,8 @@ class Content extends CI_Controller {
 	public function ajax_grid($id_type="")
 	{
 		$ci = get_instance();
-
+		$this->load->model('ModelRates');
+				
 		$where = "";
 		if ($id_type!=''){
 			if ($id_type=='1'){
@@ -287,7 +297,8 @@ class Content extends CI_Controller {
 		$this->data = array(
 			'contents_list' => $this->ModelContents->getRows($where, ' LIMIT 50'),
 			'wp_user' => $this->session->userdata('wp-user'),
-			'config' => $ci->config->item('websarrollo')
+			'config' => $ci->config->item('websarrollo'),
+			'rates' => $this->ModelRates->getRows()
 		);
 
 		$this->load->view("wpanel/ajax/contents_list", $this->data);
